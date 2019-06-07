@@ -21,9 +21,14 @@ function calculateBill() {
         billTotalElement.classList.remove("danger")
 
     }
-    if (billTotal3 >= 30) {
+   else if (billTotal3 >= 30) {
         billTotalElement.classList.remove("warning")
         billTotalElement.classList.add("danger")
+    }
+else  {
+    billTotalElement.classList.remove("warning")
+    billTotalElement.classList.remove("danger")
+
 
     }
    var roundedBillTotal = billTotal3.toFixed(2);

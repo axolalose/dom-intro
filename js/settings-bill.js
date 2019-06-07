@@ -19,7 +19,7 @@ var callCostSet = 0;
 var smsCostSet = 0;
 var warnLevel = 0;
 var critLevel = 0;
-var totalSettings = 0;
+//var totalSettings = 0;
 
 //get a reference to the 'Update settings' button
 var updateSettingsBtn = document.querySelector(".updateSettingsBtn")
@@ -30,7 +30,7 @@ SettingsBtn.addEventListener('click', function () {
     if (checkedSettingsBtn) {
         var billItemType = checkedSettingsBtn.value;
     }
-
+    var totalSettings = 0;
     if (billItemType === "call") {
         callTotalSettings += callCostSet;
     }
@@ -53,6 +53,12 @@ SettingsBtn.addEventListener('click', function () {
 
         totalElementSettings.classList.add("danger")
     }
+if (totalSettings >= critLevel){
+    (SettingsBtn.disabled = true)
+}
+
+
+
 
 
 });
