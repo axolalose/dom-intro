@@ -19,7 +19,8 @@ var callCostSet = 0;
 var smsCostSet = 0;
 var warnLevel = 0;
 var critLevel = 0;
-//var totalSettings = 0;
+
+var totalSettings = 0;
 
 //get a reference to the 'Update settings' button
 var updateSettingsBtn = document.querySelector(".updateSettingsBtn")
@@ -48,10 +49,13 @@ SettingsBtn.addEventListener('click', function () {
    
     if (totalSettings >= warnLevel) {
         totalElementSettings.classList.add("warning")
+        totalElementSettings.classList.remove("danger");
+
     }
     if (totalSettings >= critLevel) {
-
-        totalElementSettings.classList.add("danger")
+        totalElementSettings.classList.remove("warning");
+     totalElementSettings.classList.add("danger")
+        
     }
 if (totalSettings >= critLevel){
     (SettingsBtn.disabled = true)
@@ -78,7 +82,12 @@ updateSettingsBtn.addEventListener('click', function () {
         totalElementSettings.classList.remove("warning");
         totalElementSettings.classList.add("danger");
     }
-
+    if (totalSettings >= critLevel){
+        (SettingsBtn.disabled = true)
+    }
+    else  {
+        (SettingsBtn.disabled = false)
+    }
 
 
 
