@@ -27,39 +27,36 @@ var updateSettingsBtn = document.querySelector(".updateSettingsBtn")
 
 // create a variables that will keep track of all the settings
 SettingsBtn.addEventListener('click', function () {
-    var checkedSettingsBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
-    if (checkedSettingsBtn) {
-        var billItemType = checkedSettingsBtn.value;
-    }
-    var totalSettings = 0;
-    if (billItemType === "call") {
-        callTotalSettings += callCostSet;
-    }
-    if (billItemType === "sms") {
-        smsTotalSettings += smsCostSet;
-    }
-    console.log(callTotalSettings);
-    console.log(smsTotalSettings);
+    if (totalSettings < critLevel) {
+        var checkedSettingsBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+        if (checkedSettingsBtn) {
+            var billItemType = checkedSettingsBtn.value;
+        }
+        if (billItemType === "call") {
+            callTotalSettings += callCostSet;
+        }
+        if (billItemType === "sms") {
+            smsTotalSettings += smsCostSet;
+        }
 
-    callTotalSetting.innerHTML = callTotalSettings.toFixed(2);
-    smsTotalSetting.innerHTML = smsTotalSettings.toFixed(2);
-    totalSettings = callTotalSettings + smsTotalSettings;
-    //console.log(totalCost)
-    totalElementSettings.innerHTML = totalSettings.toFixed(2);
-   
-    if (totalSettings >= warnLevel) {
-        totalElementSettings.classList.add("warning")
-        totalElementSettings.classList.remove("danger");
+        callTotalSetting.innerHTML = callTotalSettings.toFixed(2);
+        smsTotalSetting.innerHTML = smsTotalSettings.toFixed(2);
+        totalSettings = callTotalSettings + smsTotalSettings;
+        //console.log(totalCost)
+        totalElementSettings.innerHTML = totalSettings.toFixed(2);
 
+        if (totalSettings >= critLevel) {
+            totalElementSettings.classList.add("danger")
+            totalElementSettings.classList.remove("warning");
+
+        } else if (totalSettings >= warnLevel) {
+            totalElementSettings.classList.add("warning")
+            totalElementSettings.classList.remove("danger");
+        } else {
+            totalElementSettings.classList.remove("danger");
+            totalElementSettings.classList.remove("warning");
+        }
     }
-    if (totalSettings >= critLevel) {
-        totalElementSettings.classList.remove("warning");
-     totalElementSettings.classList.add("danger")
-        
-    }
-if (totalSettings >= critLevel){
-    (SettingsBtn.disabled = true)
-}
 
 
 
@@ -72,35 +69,21 @@ updateSettingsBtn.addEventListener('click', function () {
     critLevel = Number(criticalLevelSetting.value);
     callCostSet = Number(callCostSetting.value);
     smsCostSet = Number(smsCostSetting.value);
-    warnLevel = Number(warningLevelSetting.value);
-    
-    if (totalSettings >= warnLevel) {
-        totalElementSettings.classList.add("warning");
-        totalElementSettings.classList.remove("danger");
-    }
+    warnLevel = Number(warningLevelSetting.value)
+
     if (totalSettings >= critLevel) {
+        totalElementSettings.classList.add("danger")
         totalElementSettings.classList.remove("warning");
-        totalElementSettings.classList.add("danger");
-    }
-    if (totalSettings >= critLevel){
-        (SettingsBtn.disabled = true)
-    }
-    else  {
-        (SettingsBtn.disabled = false)
-    }
 
-
-
+    } else if (totalSettings >= warnLevel) {
+        totalElementSettings.classList.add("warning")
+        totalElementSettings.classList.remove("danger");
+    } else {
+        totalElementSettings.classList.remove("danger");
+        totalElementSettings.classList.remove("warning");
+    }
 
 });
-
-
-
-
-
-
-
-
 
 
 
