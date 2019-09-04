@@ -1,8 +1,6 @@
-
 function calculateBill() {
-
-
     var billTotal = 0;
+    
 
 
     function addBill(billItems) {

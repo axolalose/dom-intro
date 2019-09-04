@@ -1,36 +1,46 @@
-var callsTotal = 0;
-var smsTotal = 0;
-var callsTotalElem = document.querySelector(".callTotalOne")
-var textTotalAddBtn = document.querySelector(".addToBillBtn")
-var billTypeText = document.querySelector(".billTypeText")
-var smsTotalElem = document.querySelector(".smsTotalOne")
-var totalCostElem = document.querySelector(".totalOne")
-var totalCost = 0;
+function textBill() {
+  var textTotal = 0;
+  var callBill = 0;
+  var smsBill = 0;
 
-textTotalAddBtn.addEventListener('click',function(){
-    var billTypeEntered = billTypeText.value.trim();
-    if (billTypeEntered === "call") {
-        callsTotal += 2.75
+  function text(billText) {
+    var availText = billText;
+    if (availText === "call") {
+      callBill += 2.75;
+    } else if (availText === "sms") {
+      smsBill += 0.75;
     }
-    else if (billTypeEntered === "sms") {
-        smsTotal += 0.75;
+    textTotal = callBill + smsBill;
+  }
+  function textColor() {
+    if (textTotal >= 30 && textTotal < 50) {
+      console.log("warning");
+      return "warning";
+    } else if (textTotal >= 50) {
+      console.log("danger");
+      return "danger";
+    } else {
+        return 'safe';
     }
-    console.log(callsTotal)
-    callsTotalElem.innerHTML = callsTotal.toFixed(2);
-    smsTotalElem.innerHTML = smsTotal.toFixed(2);
-    totalCost = callsTotal + smsTotal;
-    totalCostElem.innerHTML = totalCost.toFixed(2);
+    //console.log(textTotal)
+  }
+  
+  function call() {
+    return callBill.toFixed(2);
+  }
+  function Sms() {
+    return smsBill.toFixed(2);
+  }
 
-    if (totalCost > 30) {
-        totalCostElem.classList.add("warning")
-        totalCostElem.classList.remove("danger")
-
-    }
-    if (totalCost > 50) {
-        totalCostElem.classList.remove("warning")
-        totalCostElem.classList.add("danger")
-
-    }
-})
-
-
+  function textDisplay() {
+    return textTotal.toFixed(2);
+  }
+  return {
+    textBill,
+    text,
+    textDisplay,
+    call,
+    Sms,
+    textColor
+  };
+}

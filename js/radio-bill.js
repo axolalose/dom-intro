@@ -1,44 +1,52 @@
-var billItemTypeRadio = document.querySelector(".billItemTypeRadio")
-var radioBillAddBtn = document.querySelector(".radioBillAddBtn")
-var callTotalTwo = document.querySelector(".callTotalTwo")
-var smsTotalTwo = document.querySelector(".smsTotalTwo")
-var totalTwo = document.querySelector(".totalTwo")
-var callsTotal1 = 0;
-var smsTotal1 = 0;
-var totalCost1 = 0;
+function radioBill(){
+    var radioTotal = 0;
+    var callRadio = 0;
+    var smsRadio = 0;
 
-radioBillAddBtn.addEventListener('click',function(){
-    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-    if (checkedRadioBtn){
-        var billItemType = checkedRadioBtn.value;
-    }
- 
-    if (billItemType === "call"){
-        callsTotal1 += 2.75;
-    }
-    if (billItemType === "sms"){
-        smsTotal1 += 0.75;
-    }
+    function radioCosts(billRadio){
+        var updated = billRadio.split(",")
+            for(var i=0; i<updated.length; i++){
+                var availRadio = updated[i].trim();
+                if (availRadio === "call") {
+                    callRadio += 2.75;
+                }
+                else if(availRadio === "sms") {
+                    smsRadio += 0.75;
 
-    callTotalTwo.innerHTML = callsTotal1.toFixed(2);
-    smsTotalTwo.innerHTML = smsTotal1.toFixed(2);
-    totalCost1 = callsTotal1 + smsTotal1;
-    totalTwo.innerHTML = totalCost1.toFixed(2);
+                } 
 
-
-
-  
-    if (totalCost1 >= 30) {
-        totalTwo.classList.add("warning")
+            }
+            radioTotal = callRadio + smsRadio
 
     }
-    if (totalCost1 >= 50) {
-       
-        totalTwo.classList.add("danger")
-     
-
+    function color(){
+        if(radioTotal >= 30 && radioTotal < 50) {
+            console.log("warning")
+            return "warning";
+    
+        }
+      else if (radioTotal >= 50) {      
+            console.log("danger");            
+            return "danger";           
+        }
     }
 
+    function radioCall(){
+        return callRadio.toFixed(2);
+    }
+    function radioSms(){
+        return smsRadio.toFixed(2);
+    }
 
-
-});
+function radioDisplay() {
+    return radioTotal.toFixed(2);
+}
+return{
+        radioBill,
+        radioCosts,
+        radioDisplay,
+        radioCall,
+        radioSms,
+        color
+    }
+}

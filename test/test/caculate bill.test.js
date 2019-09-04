@@ -3,8 +3,9 @@ describe("calculateBill", function () {
         var testBill = calculateBill();
 
         testBill.add("call");
-        assert.equal(testBill.total(), "2.75");
+        assert.equal(testBill.total(), "5.00");
     })
+    
 
     it("This function takes in a sms and return the cost per", function () {
         var testBill = calculateBill();
